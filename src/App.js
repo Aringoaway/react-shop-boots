@@ -4,16 +4,53 @@ function App() {
   return (
     <div className="wrapper clear">
         <div className="overlay">
-            <div className="drawerBlock">
-                <h2>Košík</h2>
-                <div className="cartItem">
-                    <img src="/img/sneakers/1.jpg" alt="Sneakers"/>
-                    <div>
-                        <p>Мужские Кроссовки Nike Air Max 270</p>
-                        <b>12 999 Kč</b>
+            <div className="drawer d-flex flex-column">
+                <h2 className="d-flex justify-between mb-30">Basket
+                    <img className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Remove"/>
+                </h2>
+                <div className="items">
+                    {/*first item*/}
+                    <div className="cartItem d-flex align-center mb-20">
+                        <div style={{backgroundImage: 'url(/img/sneakers/1.jpg)'}} className="cartItemImg"></div>
+
+                        <div className="mr-20 flex">
+                            <p className="mb-5">Мужские Кроссовки Nike Air Max 270</p>
+                            <b>12 999 Kč</b>
+                        </div>
+                        <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>
                     </div>
-                    <img src="/img/btn-remove.svg" alt="Remove"/>
+                    {/*first item end*/}
+                    {/*second item */}
+                    <div className="cartItem d-flex align-center mb-20">
+                        <div style={{backgroundImage: 'url(/img/sneakers/1.jpg)'}} className="cartItemImg"></div>
+
+                        <div className="mr-20 flex">
+                            <p className="mb-5">Мужские Кроссовки Nike Air Max 270</p>
+                            <b>12 999 Kč</b>
+                        </div>
+                        <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>
+                    </div>
+                    {/*second item end*/}
                 </div>
+                <div className="cartTotalBlock">
+                    <ul>
+                        <li>
+                            <span>Total:</span>
+                            <div></div>
+                            <b>21 205 Kč</b>
+                        </li>
+                        <li>
+                            <span>DPH 5%:</span>
+                            <div></div>
+                            <b>1 205 Kč</b>
+                        </li>
+                    </ul>
+                    <button className="greenButton">
+                        Checkout
+                        <img src="/img/arrow.svg" alt="Arrow"/>
+                    </button>
+                </div>
+
             </div>
         </div>
 
@@ -43,8 +80,6 @@ function App() {
                     <input placeholder="Search..." type="text"/>
                 </div>
             </div>
-
-
             <div className="d-flex">
             {/*first card*/}
 
