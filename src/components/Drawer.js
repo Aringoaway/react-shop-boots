@@ -1,7 +1,7 @@
 function Drawer() {
     return(
-        <div style={{display: 'none'}} className="overlay">
-            <div className="drawer d-flex flex-column">
+        <div style={{display: 'none'}}  className="overlay">
+            <div className="drawer">
                 <h2 className="d-flex justify-between mb-30">Basket
                     <img className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Remove"/>
                 </h2>
