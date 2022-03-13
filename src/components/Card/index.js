@@ -1,7 +1,14 @@
+import styles from './Card.module.scss';
+console.log(styles)
+
 function Card(props) {
+    const onClickBtn =  () => {
+        alert(props.title)
+    }
+
     return(
-        <div className="card">
-            <div className="favorite">
+        <div className={styles.card}>
+            <div className={styles.favorite}>
                 <img src="/img/heart-unliked.svg" alt="Unliked"/>
             </div>
 
@@ -12,7 +19,7 @@ function Card(props) {
                     <span>Price:</span>
                     <b>{props.price}</b>
                 </div>
-                <button className="button">
+                <button className="button" onClick={onClickBtn}>
                     <img width={11} height={11} src="/img/plus.svg" alt=""/>
                 </button>
             </div>
