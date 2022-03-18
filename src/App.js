@@ -3,31 +3,17 @@ import Card from './components/Card'
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 
-const arr = [
-    {
-        title: 'Nike Blazer Mid Suede Men\'s Sneakers',
-        price: 12999,
-        imageUrl: '/img/sneakers/1.jpg'
-    },
-    {
-        title: 'Nike Air Max 270 Men\'s Running Shoes',
-        price: 15609,
-        imageUrl: '/img/sneakers/2.jpg'
-    },
-    {
-        title: 'Nike Blazer Mid Suede Men\'s Sneakers',
-        price: 8499,
-        imageUrl: '/img/sneakers/3.jpg'
-    },
-    {
-        title: 'Puma X Aka Boku Future Rider sneakers',
-        price: 8999,
-        imageUrl: '/img/sneakers/4.jpg'
-    }
-];
 
 function App() {
+    const [items, setItems] = React.useState([])
     const [cartOpened, setCartOpened] = React.useState(false);
+
+    fetch('https://623475ebdebd056201e599c9.mockapi.io/items').then(res => {
+        return res.json();
+    }).then(json => {
+        console.log(json)
+    });
+
     return (
         <div className="wrapper clear">
             {cartOpened && <Drawer onClose={() => setCartOpened(false)}/>}
@@ -43,10 +29,10 @@ function App() {
                         <input placeholder="Search..." type="text"/>
                     </div>
                 </div>
-                <div className="d-flex">
+                <div className="d-flex flex-wrap">
 
                     {
-                        arr.map((obj) => (
+                        items.map((obj) => (
                             <Card
                                 title={obj.title}
                                 price={obj.price}
