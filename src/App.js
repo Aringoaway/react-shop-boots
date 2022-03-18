@@ -8,11 +8,15 @@ function App() {
     const [items, setItems] = React.useState([])
     const [cartOpened, setCartOpened] = React.useState(false);
 
-    fetch('https://623475ebdebd056201e599c9.mockapi.io/items').then(res => {
-        return res.json();
-    }).then(json => {
-        console.log(json)
-    });
+    React.useEffect(() => {
+        fetch('https://623475ebdebd056201e599c9.mockapi.io/items').then(res => {
+            return res.json();
+        }).then(json => {
+            setItems(json)
+        });
+    }, []);
+
+
 
     return (
         <div className="wrapper clear">
