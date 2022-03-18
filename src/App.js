@@ -37,13 +37,18 @@ function App() {
                     <h1>{searchValue ? `Search results: "${searchValue}"` : 'All sneakers'}</h1>
                     <div className="search-block d-flex">
                         <img src="/img/search.svg" alt="Search"/>
+                        {searchValue && <img
+                            onClick={() => setSearchValue('')}
+                            className="clear removeBtn cu-p"
+                            src="/img/btn-remove.svg"
+                            alt="Clear"/>}
                         <input onChange={onChangeSearchInput} value={searchValue} placeholder="Search..." type="text"/>
                     </div>
                 </div>
                 <div className="d-flex flex-wrap">
                     {/*Render Items*/}
                     {
-                        items.map((item, index) => (
+                        items.filter(item => item.title.includes(searchValue)).map((item, index) => (
                             <Card
                                 key={index}
                                 title={item.title}
