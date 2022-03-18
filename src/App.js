@@ -37,7 +37,7 @@ function App() {
                     <h1>{searchValue ? `Search results: "${searchValue}"` : 'All sneakers'}</h1>
                     <div className="search-block d-flex">
                         <img src="/img/search.svg" alt="Search"/>
-                        <input onChange={onChangeSearchInput} placeholder="Search..." type="text"/>
+                        <input onChange={onChangeSearchInput} value={searchValue} placeholder="Search..." type="text"/>
                     </div>
                 </div>
                 <div className="d-flex flex-wrap">
