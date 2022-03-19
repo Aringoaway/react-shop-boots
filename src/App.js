@@ -8,7 +8,7 @@ import Drawer from "./components/Drawer";
 function App() {
     const [items, setItems] = React.useState([]);
     const [cartItems, setCartItems] = React.useState([]);
-    const [favorits, setFavorites] = React.useState([]);
+    const [favorites, setFavorites] = React.useState([]);
     const [searchValue, setSearchValue] = React.useState('');
     const [cartOpened, setCartOpened] = React.useState(false);
 
@@ -34,7 +34,7 @@ function App() {
     }
 
     const onAddToFavorite = (obj) => {
-        axios.post('https://623475ebdebd056201e599c9.mockapi.io/favotites', obj);
+        axios.post('https://623475ebdebd056201e599c9.mockapi.io/Favorites', obj);
         setFavorites((prev) => [...prev, obj]);
     }
 
@@ -72,7 +72,7 @@ function App() {
                                 title={item.title}
                                 price={item.price}
                                 imageUrl={item.imageUrl}
-                                onFavorit={(obj) => onAddToFavorite(obj)}
+                                onFavorite={(obj) => onAddToFavorite(obj)}
                                 onPlus={(obj) => onAddToCart(obj)}
                             />
                         ))

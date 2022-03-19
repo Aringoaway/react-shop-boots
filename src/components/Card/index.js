@@ -2,22 +2,23 @@ import React from "react";
 import styles from './Card.module.scss';
 
 
-function Card({ title, imageUrl, price, onFavorit, onPlus}) {
+function Card({ title, imageUrl, price, onFavorite, onPlus}) {
     const [isAdded, setIsAdded] = React.useState(false);
-    const [isFavorit, setIsFavorite] = React.useState(false);
+    const [isFavorite, setIsFavorite] = React.useState(false);
     const onClickPlus = () => {
         onPlus({ title, imageUrl, price});
         setIsAdded(!isAdded);
     }
 
-    const onClickFavotite = () => {
-        setIsFavorite(!isFavorit)
+    const onClickFavorite = () => {
+        onFavorite({ title, imageUrl, price});
+        setIsFavorite(!isFavorite);
     }
     return(
         <div className={styles.card}>
-            <div className={styles.favorite} onClick={onClickFavotite}>
+            <div className={styles.favorite} onClick={onClickFavorite}>
                 <img
-                    src={isFavorit ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"}
+                    src={isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"}
                     alt="Unliked"/>
             </div>
 
