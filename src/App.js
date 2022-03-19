@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import Card from './components/Card'
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
@@ -11,14 +12,15 @@ function App() {
     const [cartOpened, setCartOpened] = React.useState(false);
 
     React.useEffect(() => {
-        fetch('https://623475ebdebd056201e599c9.mockapi.io/items').then(res => {
-            return res.json();
-        }).then(json => {
-            setItems(json)
+        axios.get('https://623475ebdebd056201e599c9.mockapi.io/items').then(res => {
+            setItems(res.data);
         });
+
     }, []);
 
+
     const onAddToCart = (obj) => {
+        axios.post('https://623475ebdebd056201e599c9.mockapi.io/cart');
         setCartItems((prev) => [...prev, obj]);
     };
     const onChangeSearchInput = (event) => {
@@ -48,7 +50,7 @@ function App() {
                 <div className="d-flex flex-wrap">
                     {/*Render Items*/}
                     {
-                        items.filter(item => item.title.includes(searchValue)).map((item, index) => (
+                        items.filter(item => item.title.toLowerCase().includes(searchValue)).map((item, index) => (
                             <Card
                                 key={index}
                                 title={item.title}
