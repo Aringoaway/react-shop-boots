@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import axios from "axios";
 import Card from './components/Card'
 import Header from "./components/Header";
@@ -49,7 +50,9 @@ function App() {
             <Header
                 onClickCart={() => setCartOpened(true)}
             />
-
+            <Routes>
+                <Route path="/favorites" element={<Card/>}/>
+            </Routes>
             <div className="content p-40">
                 <div className="d-flex align-center justify-between mb-40">
                     <h1>{searchValue ? `Search results: "${searchValue}"` : 'All sneakers'}</h1>
