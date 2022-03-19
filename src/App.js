@@ -26,13 +26,21 @@ function App() {
         axios.post('https://623475ebdebd056201e599c9.mockapi.io/cart', obj);
         setCartItems((prev) => [...prev, obj]);
     };
+
+    const onRemoveItem = (id) => {
+        // console.log(id);
+        // axios.delete(`https://623475ebdebd056201e599c9.mockapi.io/cart/${id}`);
+        setCartItems((prev) => prev.filter(item => item.id !== id ));
+    }
+
     const onChangeSearchInput = (event) => {
         setSearchValue(event.target.value);
     }
 
+
     return (
         <div className="wrapper clear">
-            {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)}/>}
+            {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem}/>}
             <Header
                 onClickCart={() => setCartOpened(true)}
             />
