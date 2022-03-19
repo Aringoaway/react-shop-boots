@@ -15,12 +15,15 @@ function App() {
         axios.get('https://623475ebdebd056201e599c9.mockapi.io/items').then(res => {
             setItems(res.data);
         });
+        axios.get('https://623475ebdebd056201e599c9.mockapi.io/cart').then(res => {
+            setCartItems(res.data);
+        });
 
     }, []);
 
 
     const onAddToCart = (obj) => {
-        axios.post('https://623475ebdebd056201e599c9.mockapi.io/cart');
+        axios.post('https://623475ebdebd056201e599c9.mockapi.io/cart', obj);
         setCartItems((prev) => [...prev, obj]);
     };
     const onChangeSearchInput = (event) => {
