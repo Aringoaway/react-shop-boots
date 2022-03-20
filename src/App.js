@@ -16,21 +16,21 @@ function App() {
     const [cartOpened, setCartOpened] = React.useState(false);
 
     React.useEffect(() => {
-        axios.get('https://623475ebdebd056201e599c9.mockapi.io/items').then(res => {
-            setItems(res.data);
-        });
-        axios.get('https://623475ebdebd056201e599c9.mockapi.io/cart').then(res => {
-            setCartItems(res.data);
-        });
-        axios.get('https://623475ebdebd056201e599c9.mockapi.io/Favorites').then(res => {
-            setFavorites(res.data);
-        });
+        async function fetchData() {
+            const cartResponse = await axios.get('https://623475ebdebd056201e599c9.mockapi.io/cart');
+            const favoritesResponse = await axios.get('https://623475ebdebd056201e599c9.mockapi.io/Favorites');
+            const itemsResponse = await axios.get('https://623475ebdebd056201e599c9.mockapi.io/items');
 
+            setFavorites(favoritesResponse.data);
+            setCartItems(cartResponse.data);
+            setItems(itemsResponse.data);
+        }
+
+        fetchData();
     }, []);
 
 
     const onAddToCart = (obj) => {
-        console.log(obj)
         try {
             if (cartItems.find((item) => Number(item.id) == Number(obj.id))) {
                 setCartItems(prev => prev.filter((item) => Number(item.id) !== Number(obj.id)));
@@ -77,6 +77,7 @@ function App() {
                 <Route path="/" exact element={
                     <Home
                         items={items}
+                        cartItems={cartItems}
                         searchValue={searchValue}
                         setSearchValue={setSearchValue}
                         onChangeSearchInput={onChangeSearchInput}

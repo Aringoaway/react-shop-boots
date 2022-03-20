@@ -1,9 +1,20 @@
 import React from "react";
+import ContentLoader from "react-content-loader"
 import styles from './Card.module.scss';
 
 
-function Card({id, title, imageUrl, price, onFavorite, onPlus, favorited = false}) {
-    const [isAdded, setIsAdded] = React.useState(false);
+function Card({
+    id,
+    title,
+    imageUrl,
+    price,
+    onFavorite,
+    onPlus,
+    favorited = false,
+    added = false,
+    loading = false
+    }) {
+    const [isAdded, setIsAdded] = React.useState(added);
     const [isFavorite, setIsFavorite] = React.useState(favorited);
     const onClickPlus = () => {
         onPlus({ id, title, imageUrl, price});
@@ -16,26 +27,44 @@ function Card({id, title, imageUrl, price, onFavorite, onPlus, favorited = false
     }
     return(
         <div className={styles.card}>
-            <div className={styles.favorite} onClick={onClickFavorite}>
-                <img
-                    src={isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"}
-                    alt="Unliked"/>
-            </div>
+            {
+                loading ? ( <ContentLoader
+                    speed={2}
+                    width={150}
+                    height={230}
+                    viewBox="0 0 150 230"
+                    backgroundColor="#f3f3f3"
+                    foregroundColor="#ecebeb" >
+                    <rect x="0" y="171" rx="3" ry="3" width="93" height="15" />
+                    <rect x="0" y="146" rx="3" ry="3" width="150" height="15" />
+                    <rect x="0" y="204" rx="8" ry="8" width="80" height="24" />
+                    <rect x="118" y="198" rx="8" ry="8" width="32" height="32" />
+                    <rect x="0" y="0" rx="8" ry="8" width="160" height="130" />
+                    <rect x="75" y="60" rx="0" ry="0" width="4" height="0" />
+                </ContentLoader> ): (
+                <>
+                    <div className={styles.favorite} onClick={onClickFavorite}>
+                        <img
+                            src={isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"}
+                            alt="Unliked"/>
+                    </div>
 
-            <img width={133} height={112} src={imageUrl} alt=""/>
-            <p>{title}</p>
-            <div className="d-flex justify-between align-center">
-                <div className="d-flex flex-column ">
-                    <span>Price:</span>
-                    <b>{price}</b>
-                </div>
-                    <img
-                        className={styles.plus}
-                        onClick={onClickPlus}
-                        src={isAdded ? "/img/btn-checked.svg" : "/img/btn-plus.svg"}
-                        alt=""
-                    />
-            </div>
+                    <img width='100%' height={135} src={imageUrl} alt=""/>
+                    <p>{title}</p>
+                    <div className="d-flex justify-between align-center">
+                        <div className="d-flex flex-column ">
+                            <span>Price:</span>
+                            <b>{price}</b>
+                        </div>
+                        <img
+                            className={styles.plus}
+                            onClick={onClickPlus}
+                            src={isAdded ? "/img/btn-checked.svg" : "/img/btn-plus.svg"}
+                            alt=""
+                        />
+                    </div>
+                </>
+                )}
         </div>
     );
 }
