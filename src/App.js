@@ -40,14 +40,16 @@ function App() {
     }
 
     const onAddToFavorite = async (obj) => {
-        console.log(obj);
-        if (favorites.find((favObj) => favObj.id == obj.id)) {
-            axios.delete(`https://623475ebdebd056201e599c9.mockapi.io/Favorites/${obj.id}`);
-        } else {
-            const resp = await axios.post('https://623475ebdebd056201e599c9.mockapi.io/Favorites', obj);
-            setFavorites((prev) => [...prev, obj]);
+        try {
+            if (favorites.find((favObj) => favObj.id == obj.id)) {
+                axios.delete(`https://623475ebdebd056201e599c9.mockapi.io/Favorites/${obj.id}`);
+            } else {
+                const {data} = await axios.post('https://623475ebdebd056201e599c9.mockapi.io/Favorites', obj);
+                setFavorites((prev) => [...prev, data]);
+            }
+        } catch (error) {
+            alert('Failed to add to favorites')
         }
-
     }
 
     const onChangeSearchInput = (event) => {
