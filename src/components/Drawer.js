@@ -3,6 +3,9 @@ import Info from "./Info";
 import AppContext from "../context";
 import axios from "axios";
 
+//bad code because you have to remove every element. Mockapi does not have the required function to remove
+const deley = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 function Drawer({ onClose, onRemove, items = [] }) {
     const { cartItems,  setCartItems } = React.useContext(AppContext);
     const [orderId, setOrderId] = React.useState(null);
@@ -13,17 +16,23 @@ function Drawer({ onClose, onRemove, items = [] }) {
         try{
             setIsLoading(true);
             const {data} = await axios.post('https://623475ebdebd056201e599c9.mockapi.io/orders', {
-                items: cartItems
+                items: cartItems,
             });
             setOrderId(data.id);
             setIsOrderComplete(true);
             setCartItems([]);
+
+            //bad code because you have to remove every element. Mockapi does not have the required function to remove
+            for (let i = 0; i < cartItems.length ; i++) {
+                const item = cartItems[i];
+                await axios.delete('https://623475ebdebd056201e599c9.mockapi.io/cart/' + item.id);
+                await deley(1000);
+            }
         } catch (error) {
             alert("Failed to create order :(");
         }
         setIsLoading(false);
     }
-    console.log("выведы  id",orderId);
 
     return(
         <div  className="overlay">
