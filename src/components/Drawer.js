@@ -1,15 +1,29 @@
 import React from "react";
 import Info from "./Info";
 import AppContext from "../context";
+import axios from "axios";
 
 function Drawer({ onClose, onRemove, items = [] }) {
-    const { setCartItems } = React.useContext(AppContext);
+    const { cartItems,  setCartItems } = React.useContext(AppContext);
+    const [orderId, setOrderId] = React.useState(null);
     const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(false);
 
-    const onCkickOrder = () => {
-        setIsOrderComplete(true);
-        setCartItems([]);
+    const onCkickOrder = async () => {
+        try{
+            setIsLoading(true);
+            const {data} = await axios.post('https://623475ebdebd056201e599c9.mockapi.io/orders', {
+                items: cartItems
+            });
+            setOrderId(data.id);
+            setIsOrderComplete(true);
+            setCartItems([]);
+        } catch (error) {
+            alert("Failed to create order :(");
+        }
+        setIsLoading(false);
     }
+    console.log("выведы  id",orderId);
 
     return(
         <div  className="overlay">
@@ -50,7 +64,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
                                         <b>1 205 Kč</b>
                                     </li>
                                 </ul>
-                                <button onClick={onCkickOrder} className="greenButton">
+                                <button disabled={isLoading} onClick={onCkickOrder} className="greenButton">
                                     Checkout
                                     <img src="/img/arrow.svg" alt="Arrow"/>
                                 </button>
@@ -61,7 +75,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
                         (
                             <Info
                                 title={isOrderComplete ? "Order is processed" : "Empty cart"}
-                                description={isOrderComplete ? "Your order #18 will be delivered to courier soon" : "Add at least one pair of sneakers to place an order"}
+                                description={isOrderComplete ? `Your order #${orderId} will be delivered to courier soon` : "Add at least one pair of sneakers to place an order"}
                                 image={isOrderComplete ? "/img/complete-order.jpg" : "/img/empty-cart.jpg"}
                             />
 
