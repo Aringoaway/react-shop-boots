@@ -1,6 +1,16 @@
+import React from "react";
 import Info from "./Info";
+import AppContext from "../context";
 
 function Drawer({ onClose, onRemove, items = [] }) {
+    const { setCartItems } = React.useContext(AppContext);
+    const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+
+    const onCkickOrder = () => {
+        setIsOrderComplete(true);
+        setCartItems([]);
+    }
+
     return(
         <div  className="overlay">
             <div className="drawer">
@@ -40,7 +50,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
                                         <b>1 205 Kč</b>
                                     </li>
                                 </ul>
-                                <button className="greenButton">
+                                <button onClick={onCkickOrder} className="greenButton">
                                     Checkout
                                     <img src="/img/arrow.svg" alt="Arrow"/>
                                 </button>
@@ -50,9 +60,9 @@ function Drawer({ onClose, onRemove, items = [] }) {
                          :
                         (
                             <Info
-                                title="Empty cart"
-                                description="Add at least one pair of sneakers to place an order"
-                                image="/img/empty-cart.jpg"
+                                title={isOrderComplete ? "Order is processed" : "Empty cart"}
+                                description={isOrderComplete ? "Your order #18 will be delivered to courier soon" : "Add at least one pair of sneakers to place an order"}
+                                image={isOrderComplete ? "/img/complete-order.jpg" : "/img/empty-cart.jpg"}
                             />
 
                         )

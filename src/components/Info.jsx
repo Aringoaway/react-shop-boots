@@ -9,7 +9,6 @@ const Info = ({ title, image, description }) => {
             <img
                 className="mb-20"
                 width={120}
-                height={120}
                 src={image}
                 alt="Empty box"/>
             <h2>{title}t</h2>
