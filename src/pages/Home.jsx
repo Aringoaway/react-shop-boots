@@ -4,7 +4,6 @@ import AppContext from "../context";
 
 function Home({
                   items,
-                  cartItems,
                   searchValue,
                   setSearchValue,
                   onChangeSearchInput,
@@ -12,7 +11,6 @@ function Home({
                   onAddToCart,
                   isLoading
     }) {
-    const { isItemAdded } = React.useContext(AppContext);
     const renderItems = () => {
         const filtredItems = items.filter(item =>
             item.title.toLowerCase().includes(searchValue.toLowerCase()));
@@ -21,7 +19,6 @@ function Home({
                 key={index}
                 onFavorite={(obj) => onAddToFavorite(obj)}
                 onPlus={(obj) => onAddToCart(obj)}
-                added = {isItemAdded(item.id)}
                 loading={isLoading}
                 {...item}
             />

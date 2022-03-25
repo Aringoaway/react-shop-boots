@@ -8,7 +8,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
 
                 {
                     items.length > 0 ? (
-                        <div className="d-flex flex-column">
+                        <div className="d-flex flex-column flex">
                             <div className="items">
                                 {/*Render Cart items*/}
                                 {
