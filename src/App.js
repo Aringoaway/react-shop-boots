@@ -35,6 +35,7 @@ function App() {
                 setItems(itemsResponse.data);
             } catch (error) {
                 alert('Error while requesting data :(')
+                console.error(error);
             }
         }
 
@@ -42,23 +43,29 @@ function App() {
     }, []);
 
 
-    const onAddToCart = (obj) => {
+    const onAddToCart = async (obj) => {
         try {
             if (cartItems.find((item) => Number(item.id) == Number(obj.id))) {
                 setCartItems(prev => prev.filter((item) => Number(item.id) !== Number(obj.id)));
-                axios.delete(`https://623475ebdebd056201e599c9.mockapi.io/cart/${obj.id}`);
+                await axios.delete(`https://623475ebdebd056201e599c9.mockapi.io/cart/${obj.id}`);
             } else {
-                axios.post('https://623475ebdebd056201e599c9.mockapi.io/cart', obj);
                 setCartItems((prev) => [...prev, obj]);
+                await axios.post('https://623475ebdebd056201e599c9.mockapi.io/cart', obj);
             }
         } catch (error) {
-            alert('Failed to add to basket')
+            alert('Failed to add to basket');
+            console.error(error);
         }
     };
 
     const onRemoveItem = (id) => {
-        axios.delete(`https://623475ebdebd056201e599c9.mockapi.io/cart/${id}`);
-        setCartItems((prev) => prev.filter(item => item.id !== id ));
+        try {
+            axios.delete(`https://623475ebdebd056201e599c9.mockapi.io/cart/${id}`);
+            setCartItems((prev) => prev.filter(item => item.id !== id ));
+        } catch (error) {
+            alert('Failed to remove from basket');
+            console.error(error);
+        }
     }
 
     const onAddToFavorite = async (obj) => {
@@ -71,7 +78,8 @@ function App() {
                 setFavorites((prev) => [...prev, data]);
             }
         } catch (error) {
-            alert('Failed to add to favorites')
+            alert('Failed to add to favorites');
+            console.error(error);
         }
     }
 
