@@ -11,8 +11,8 @@ function Drawer({ onClose, onRemove, items = [] }) {
     const [orderId, setOrderId] = React.useState(null);
     const [isOrderComplete, setIsOrderComplete] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
-    const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
 
+    const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
 
     const onCkickOrder = async () => {
         try{
@@ -92,12 +92,6 @@ function Drawer({ onClose, onRemove, items = [] }) {
 
                         )
                 }
-
-
-
-
-
-
             </div>
         </div>
     );
