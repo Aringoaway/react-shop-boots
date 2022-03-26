@@ -19,6 +19,7 @@ function App() {
     const [cartOpened, setCartOpened] = React.useState(false);
     const [isLoading, seIsLoading] = React.useState(true);
 
+
     React.useEffect(() => {
         async function fetchData() {
             const cartResponse = await axios.get('https://623475ebdebd056201e599c9.mockapi.io/cart');
