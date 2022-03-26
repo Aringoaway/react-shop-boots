@@ -1,13 +1,13 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import axios from "axios";
-import Card from './components/Card'
 import Header from "./components/Header";
-import Drawer from "./components/Drawer";
+import Index from "./components/Drawer";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import AppContext from "./context";
 import Orders from "./pages/Orders";
+import Drawer from "./components/Drawer";
 
 
 
@@ -79,7 +79,6 @@ function App() {
         return cartItems.some(obj => Number(obj.id) == Number(id));
     }
 
-
     return (
         <AppContext.Provider value={{
             items,
@@ -92,7 +91,7 @@ function App() {
             setCartItems
         }}>
             <div className="wrapper clear">
-                {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem}/>}
+                <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem} opened={cartOpened}/>
                 <Header
                     onClickCart={() => setCartOpened(true)}
                 />

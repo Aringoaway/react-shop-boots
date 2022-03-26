@@ -1,12 +1,15 @@
 import React from "react";
-import Info from "./Info";
-import AppContext from "../context";
 import axios from "axios";
+
+import AppContext from "../../context";
+import Info from "../Info";
+
+import styles from './Drawer.module.scss'
 
 //bad code because you have to remove every element. Mockapi does not have the required function to remove
 const deley = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function Drawer({ onClose, onRemove, items = [] }) {
+function Drawer({ onClose, onRemove, items = [], opened }) {
     const { cartItems,  setCartItems } = React.useContext(AppContext);
     const [orderId, setOrderId] = React.useState(null);
     const [isOrderComplete, setIsOrderComplete] = React.useState(false);
@@ -37,8 +40,8 @@ function Drawer({ onClose, onRemove, items = [] }) {
     }
 
     return(
-        <div  className="overlay">
-            <div className="drawer">
+        <div  className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
+            <div className={styles.drawer}>
                 <h2 className="d-flex justify-between mb-30">Basket
                     <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
                 </h2>
