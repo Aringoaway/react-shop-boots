@@ -72,7 +72,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
                                     <li>
                                         <span>DPH 5%:</span>
                                         <div></div>
-                                        <b>1 205 Kč</b>
+                                        <b>{Math.round(totalPrice / 100 * 5)} Kč</b>
                                     </li>
                                 </ul>
                                 <button disabled={isLoading} onClick={onCkickOrder} className="greenButton">
