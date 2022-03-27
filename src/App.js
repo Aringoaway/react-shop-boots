@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import axios from "axios";
 import Header from "./components/Header";
-import Index from "./components/Drawer";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import AppContext from "./context";
@@ -42,7 +41,6 @@ function App() {
 
         fetchData();
     }, []);
-
 
     const onAddToCart = async (obj) => {
         try {
