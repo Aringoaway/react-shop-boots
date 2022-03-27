@@ -24,10 +24,11 @@ function App() {
     React.useEffect(() => {
         async function fetchData() {
             try {
-                const cartResponse = await axios.get('https://623475ebdebd056201e599c9.mockapi.io/cart');
-                const favoritesResponse = await axios.get('https://623475ebdebd056201e599c9.mockapi.io/Favorites');
-                const itemsResponse = await axios.get('https://623475ebdebd056201e599c9.mockapi.io/items');
-
+                const [cartResponse, favoritesResponse, itemsResponse] = await Promise.all([
+                    axios.get('https://623475ebdebd056201e599c9.mockapi.io/cart'),
+                    axios.get('https://623475ebdebd056201e599c9.mockapi.io/Favorites'),
+                    axios.get('https://623475ebdebd056201e599c9.mockapi.io/items')
+                ]);
                 seIsLoading (false);
 
                 setFavorites(favoritesResponse.data);
