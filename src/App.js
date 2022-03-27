@@ -51,8 +51,19 @@ function App() {
                 setCartItems(prev => prev.filter((item) => Number(item.parentId) !== Number(obj.id)));
                 await axios.delete(`https://623475ebdebd056201e599c9.mockapi.io/cart/${findItem.id}`);
             } else {
+                setCartItems((prev) => [...prev, obj]);
                 const { data } = await axios.post('https://623475ebdebd056201e599c9.mockapi.io/cart', obj);
-                setCartItems((prev) => [...prev, data]);
+                setCartItems((prev) => prev.map(item => {
+                    //if the id from the array is equal to the id that came from the backend
+                    if(item.parentId == data.parentId) {
+                        return {
+                            //replace id with what came in the backend
+                            ...item,
+                            id: data.id
+                        };
+                    }
+                    return item;
+                }));
             }
         } catch (error) {
             alert('Failed to add to basket');
