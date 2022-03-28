@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import axios from "axios";
 import Header from "./components/Header";
-import Index from "./components/Drawer";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import AppContext from "./context";
@@ -42,7 +41,6 @@ function App() {
 
         fetchData();
     }, []);
-
 
     const onAddToCart = async (obj) => {
         try {
@@ -121,7 +119,7 @@ function App() {
                     onClickCart={() => setCartOpened(true)}
                 />
                 <Routes>
-                    <Route path="/" exact element={
+                    <Route path="" exact element={
                         <Home
                             items={items}
                             cartItems={cartItems}
@@ -133,11 +131,11 @@ function App() {
                             isLoading={isLoading}
                         />
                     }/>
-                    <Route path="/favorites" exact element={
+                    <Route path="favorites" exact element={
                         <Favorites/>
                     }/>
 
-                    <Route path="/orders" exact element={
+                    <Route path="orders" exact element={
                         <Orders/>
                     }/>
                 </Routes>

@@ -43,7 +43,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
         <div  className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
             <div className={styles.drawer}>
                 <h2 className="d-flex justify-between mb-30">Basket
-                    <img onClick={onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Close"/>
+                    <img onClick={onClose} className="removeBtn cu-p" src="img/btn-remove.svg" alt="Close"/>
                 </h2>
 
                 {
@@ -60,7 +60,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                                                 <p className="mb-5">{obj.title}</p>
                                                 <b>{obj.price}</b>
                                             </div>
-                                            <img onClick={() => onRemove(obj.id)} className="removeBtn" src="/img/btn-remove.svg" alt="Remove"/>
+                                            <img onClick={() => onRemove(obj.id)} className="removeBtn" src="img/btn-remove.svg" alt="Remove"/>
                                         </div>
                                     ))
                                 }
@@ -80,7 +80,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                                 </ul>
                                 <button disabled={isLoading} onClick={onCkickOrder} className="greenButton">
                                     Checkout
-                                    <img src="/img/arrow.svg" alt="Arrow"/>
+                                    <img src="img/arrow.svg" alt="Arrow"/>
                                 </button>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                             <Info
                                 title={isOrderComplete ? "Order is processed" : "Empty cart"}
                                 description={isOrderComplete ? `Your order #${orderId} will be delivered to courier soon` : "Add at least one pair of sneakers to place an order"}
-                                image={isOrderComplete ? "/img/complete-order.jpg" : "/img/empty-cart.jpg"}
+                                image={isOrderComplete ? "img/complete-order.jpg" : "img/empty-cart.jpg"}
                             />
 
                         )
